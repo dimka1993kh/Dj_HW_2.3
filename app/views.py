@@ -4,11 +4,13 @@ from django.shortcuts import render
 
 from .file import File, Directory
 
+from django.conf import settings
+
 
 def file_list(request, date=None):
     template_name = 'index.html'
     # Реализуйте алгоритм подготавливающий контекстные данные для шаблона по примеру:
-    files = Directory('files').find_files()
+    files = Directory(settings.FILES_PATH).find_files()
     list_files = list(map(lambda file:
                                         {'name': file['file_name'],
                                         'ctime': file['file_object'].find_datetime_create(),
